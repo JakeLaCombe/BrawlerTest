@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float vx = 0;
-        float vy = rigidBody.velocity.y;
+        float vy =  rigidBody.velocity.y;
         float vz = 0;
 
         if (Input.GetKey(KeyCode.LeftArrow)) {
@@ -41,5 +41,14 @@ public class PlayerMovement : MonoBehaviour
            vy,
            vz
         );
+
+        GameObject shadow = GameObject.Find("Shadow").gameObject;
+
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, new Vector3(0.0f, -20.0f, 0.0f), out hit))
+        {
+            Debug.Log(hit.point);
+            shadow.transform.position = hit.point;
+        }
     }
 }
