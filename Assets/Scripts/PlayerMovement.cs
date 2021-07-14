@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     private Rigidbody rigidBody;
+
+    private IInputable input;
     Vector3 lastWalkVector = Vector3.zero;
 
     void Start()
@@ -51,4 +53,11 @@ public class PlayerMovement : MonoBehaviour
             shadow.transform.position = hit.point;
         }
     }
+}
+
+public enum PlayerState {
+    INITIAL,
+    STANDING,
+    RUNNING,
+    JUMPING,
 }
