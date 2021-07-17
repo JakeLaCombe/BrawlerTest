@@ -21,6 +21,8 @@ public class PlayerFightingState: IState
     }
     public void Execute()
     {
+        player.rigidBody.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+
         if(player.input.AttackOne())
         {
             if (punchCoroutine != null)
