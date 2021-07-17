@@ -41,12 +41,17 @@ public class KeyboardInput : MonoBehaviour, IInputable
 
     public bool Jump()
     {
-        return Input.GetKey(KeyCode.X);
+        return Input.GetKey(KeyCode.S);
     }
 
     public bool Pause()
     {
         return Input.GetKeyDown(KeyCode.Return);
+    }
+
+    public bool AttackOne()
+    {
+        return Input.GetKeyDown(KeyCode.D);
     }
 
     // Start is called before the first frame update
