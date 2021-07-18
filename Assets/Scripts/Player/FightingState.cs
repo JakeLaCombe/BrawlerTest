@@ -20,7 +20,7 @@ public class PlayerFightingState: IState
         
         if (player.GetHitTarget()) {
             Enemy enemy = player.GetHitTarget().GetComponent<Enemy>();
-            enemy.health -= 1.0f;
+            enemy.Hit();
         }
     }
     public void Execute()
@@ -34,10 +34,8 @@ public class PlayerFightingState: IState
 
                 if (!enemy.isDead())
                 {
-                    enemy.stateMachine.ChangeState(enemy.hitState);
+                    enemy.Hit();
                 }
-
-                enemy.health -= 1.0f;
             }
 
             if (punchCoroutine != null)
@@ -46,7 +44,7 @@ public class PlayerFightingState: IState
             }
 
             punchCoroutine = player.StartCoroutine(StopPunch());
-            punchCount++;   
+            punchCount++;
         }
 
         if (punchCount % 2 == 1)
