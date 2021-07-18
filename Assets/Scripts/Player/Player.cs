@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public StateMachine stateMachine;
     public PlayerFightingState fightingState;
     public PlayerJumpingState jumpingState;
     public PlayerMovingState movingState;
-
-
-    // Start is called before the first frame update
     public Rigidbody rigidBody;
     private SpriteRenderer spriteRenderer;
     private Coroutine reposition;
     public IInputable input;
     public Animator animator;
+    public GameObject hitTarget;
 
     void Start()
     {
-
         rigidBody = GetComponent<Rigidbody>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -84,6 +81,16 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isPunching", true);
         yield return new WaitForSeconds(0.1f);
         animator.SetBool("isPunching", false);
+    }
+
+    public void SetHitTarget(GameObject target)
+    {
+        this.hitTarget = target;
+    }
+
+    public GameObject GetHitTarget()
+    {
+        return this.hitTarget;
     }
 }
 

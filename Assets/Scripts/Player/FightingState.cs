@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerFightingState: IState
 {
-    PlayerMovement player;
+    Player player;
     Coroutine punchCoroutine;
 
     int punchCount;
 
-    public PlayerFightingState(PlayerMovement player)
+    public PlayerFightingState(Player player)
     {
         this.player = player;
     }
 
     public void Enter()
     {
-        Debug.Log("Restarting");
         punchCount = 0;
         punchCoroutine = player.StartCoroutine(StopPunch());
     }
@@ -40,6 +39,12 @@ public class PlayerFightingState: IState
         } else {
             player.animator.SetBool("isPunching", false);
             player.animator.SetBool("isPunchingTwo", true);
+        }
+
+        if (player.GetHitTarget())
+        {
+            GameObject.Destroy(player.GetHitTarget());
+            player.SetHitTarget(null);
         }
     }
     public void Exit()

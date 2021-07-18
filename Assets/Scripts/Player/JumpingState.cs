@@ -1,8 +1,8 @@
 using UnityEngine;
 public class PlayerJumpingState: IState
 {
-    PlayerMovement player;
-    public PlayerJumpingState(PlayerMovement player)
+    Player player;
+    public PlayerJumpingState(Player player)
     {
         this.player = player;
     }

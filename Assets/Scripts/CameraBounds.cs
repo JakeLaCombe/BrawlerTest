@@ -5,14 +5,4 @@ using UnityEngine;
 public class CameraBounds : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log("Camera Height");
-        Debug.Log(Camera.main.orthographicSize);
-    }
 }

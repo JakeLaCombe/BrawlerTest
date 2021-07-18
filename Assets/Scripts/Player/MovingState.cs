@@ -1,8 +1,8 @@
 using UnityEngine;
 public class PlayerMovingState: IState
 {
-    PlayerMovement player;
-    public PlayerMovingState(PlayerMovement player)
+    Player player;
+    public PlayerMovingState(Player player)
     {
         this.player = player;
     }
