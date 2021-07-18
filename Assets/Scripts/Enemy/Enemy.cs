@@ -7,8 +7,14 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     public StateMachine stateMachine;
     public EnemyChaseState chaseState;
+    public EnemyHitState hitState;
+    public EnemyKillState killState;
     public Rigidbody rigidBody;
     public Animator animator;
+
+
+    [HideInInspector]
+    public float health = 10.0f;
 
     void Start()
     {
@@ -17,6 +23,9 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         
         chaseState = new EnemyChaseState(this);
+        hitState = new EnemyHitState(this);
+        killState = new EnemyKillState(this);
+
         stateMachine.ChangeState(chaseState);
     }
 
@@ -24,5 +33,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+    }
+
+    public bool isDead()
+    {
+        return stateMachine.GetCurrentState() == killState;
     }
 }

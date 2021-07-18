@@ -37,7 +37,6 @@ public class Player : MonoBehaviour
         stateMachine.Update();
       
         UpdateShadow();
-       
     }
 
     private void UpdateShadow()
@@ -73,14 +72,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         GameObject.Find("VirtualCamera").SetActive(false);
         CinemachineVirtualCamera camera = GameObject.Find("VirtualCameraSecondary").GetComponent<CinemachineVirtualCamera>();
-    }
-
-    private IEnumerator StopPunch()
-    {
-
-        animator.SetBool("isPunching", true);
-        yield return new WaitForSeconds(0.1f);
-        animator.SetBool("isPunching", false);
     }
 
     public void SetHitTarget(GameObject target)

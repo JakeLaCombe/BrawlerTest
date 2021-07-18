@@ -17,6 +17,11 @@ public class PlayerFightingState: IState
     {
         punchCount = 0;
         punchCoroutine = player.StartCoroutine(StopPunch());
+        
+        if (player.GetHitTarget()) {
+            Enemy enemy = player.GetHitTarget().GetComponent<Enemy>();
+            enemy.health -= 1.0f;
+        }
     }
     public void Execute()
     {
@@ -24,27 +29,35 @@ public class PlayerFightingState: IState
 
         if(player.input.AttackOne())
         {
+            if (player.GetHitTarget()) {
+                Enemy enemy = player.GetHitTarget().GetComponent<Enemy>();
+
+                if (!enemy.isDead())
+                {
+                    enemy.stateMachine.ChangeState(enemy.hitState);
+                }
+
+                enemy.health -= 1.0f;
+            }
+
             if (punchCoroutine != null)
             {
                 player.StopCoroutine(punchCoroutine);
             }
 
             punchCoroutine = player.StartCoroutine(StopPunch());
-            punchCount++;
+            punchCount++;   
         }
 
-        if (punchCount % 2 == 1) {
+        if (punchCount % 2 == 1)
+        {
             player.animator.SetBool("isPunching", true);
             player.animator.SetBool("isPunchingTwo", false);
-        } else {
+        }
+        else
+        {
             player.animator.SetBool("isPunching", false);
             player.animator.SetBool("isPunchingTwo", true);
-        }
-
-        if (player.GetHitTarget())
-        {
-            GameObject.Destroy(player.GetHitTarget());
-            player.SetHitTarget(null);
         }
     }
     public void Exit()
@@ -58,6 +71,7 @@ public class PlayerFightingState: IState
         player.animator.SetBool("isPunching", false);
         player.animator.SetBool("isPunchingTwo", false);
         player.stateMachine.ChangeState(player.movingState);
+        punchCoroutine = null;
     }
     
 }

@@ -7,8 +7,6 @@ public class EnemyChaseState: IState
     public Enemy enemy;
     public Player player;
 
-    public float health = 10.0f;
-
     public EnemyChaseState(Enemy enemy)
     {
         this.enemy = enemy;

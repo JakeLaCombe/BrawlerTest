@@ -22,4 +22,9 @@ public class StateMachine
     {
         if (currentState != null) currentState.Execute();
     }
+
+    public IState GetCurrentState()
+    {
+        return currentState;
+    }
 }
