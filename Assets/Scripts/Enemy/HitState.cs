@@ -64,7 +64,6 @@ public class EnemyHitState: IState
     public void Increment()
     {
         if (hitCount >= 3) {
-            Debug.Log("Incrementing");
             enemy.stateMachine.ChangeState(enemy.knockBackState);
             return;
         }

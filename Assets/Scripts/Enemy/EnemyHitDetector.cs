@@ -2,28 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitDetector : MonoBehaviour
+public class EnemyHitDetector : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Player player;
+   
+    private Enemy enemy;
     void Start()
     {
-        player = this.transform.parent.GetComponent<Player>();
+        enemy = this.transform.parent.GetComponent<Enemy>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Player")
         {
-            player.SetHitTarget(other.gameObject);
+            enemy.SetHitTarget(other.gameObject);
         }    
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Player")
         {
-            player.SetHitTarget(null);
+            enemy.SetHitTarget(null);
         }    
     }
 }

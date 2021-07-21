@@ -8,8 +8,9 @@ public class PlayerJumpingState: IState
     }
 
     public void Enter()
-    {
-
+    { 
+        player.animator.SetBool("isRunning", false);
+        player.animator.SetBool("isAirborne", true);
     }
     public void Execute()
     {
@@ -42,13 +43,12 @@ public class PlayerJumpingState: IState
         if (Mathf.Abs(vy) < float.Epsilon)
         {
             player.stateMachine.ChangeState(player.movingState);
-        }
-
-        player.animator.SetBool("isRunning", false);
-        player.animator.SetBool("isAirborne", true);
+        }  
     }
+
     public void Exit()
     {
-
+        player.animator.SetBool("isRunning", true);
+        player.animator.SetBool("isAirborne", false);
     }
 }

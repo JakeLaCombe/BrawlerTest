@@ -4,21 +4,23 @@ using UnityEngine;
 public class PlayerHitState: IState
 {
 
-    public Enemy enemy;
     public Player player;
+    public int hitCount;
+
     public Coroutine recoverCoroutine;
 
     public bool hitEffect = true;
 
-    public PlayerHitState(Enemy enemy)
+    public PlayerHitState(Player player)
     {
-        this.enemy = enemy;
+        this.player = player;
+        hitCount = 0;
     }
 
     public void Enter()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        enemy.animator.SetBool("isHit", true);
+        player.animator.SetBool("isHit", true);
 
         if (hitEffect) {
             hitEffect = false;
@@ -26,24 +28,24 @@ public class PlayerHitState: IState
     }
     public void Execute()
     {
-       enemy.animator.SetBool("isHit", true);
+       player.animator.SetBool("isHit", true);
 
        if (recoverCoroutine == null) {
-         recoverCoroutine = enemy.StartCoroutine(recover());
+         recoverCoroutine = player.StartCoroutine(recover());
        }
 
-       if (enemy.health <= 0.0f)
+       if (player.health <= 0.0f)
        {
-           enemy.stateMachine.ChangeState(enemy.killState);
+           player.stateMachine.ChangeState(player.killState);
        }
     }
 
     public void Exit()
     {
-        enemy.animator.SetBool("isHit", false);       
+        player.animator.SetBool("isHit", false);       
         
         if (recoverCoroutine != null) {
-            enemy.StopCoroutine(recoverCoroutine);
+            player.StopCoroutine(recoverCoroutine);
             recoverCoroutine = null;
         }
 
@@ -52,9 +54,26 @@ public class PlayerHitState: IState
 
     public IEnumerator recover()
     {
-        enemy.health -= 1.0f;
-        yield return new WaitForSeconds(0.05f);
+        player.health -= 1.0f;
+        yield return new WaitForSeconds(1.0f);
         recoverCoroutine = null;
-        enemy.stateMachine.ChangeState(enemy.chaseState);
+        player.stateMachine.ChangeState(player.movingState);
+    }
+
+    public void Increment()
+    {
+        if (hitCount >= 3) {
+            player.stateMachine.ChangeState(player.knockBackState);
+            return;
+        }
+
+        hitCount += 1;
+
+        if (recoverCoroutine != null)
+        {
+            player.StopCoroutine(recoverCoroutine);
+        }
+
+        recoverCoroutine = player.StartCoroutine(recover());
     }
 }

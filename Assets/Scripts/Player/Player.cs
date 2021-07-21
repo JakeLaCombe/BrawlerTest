@@ -9,12 +9,19 @@ public class Player : MonoBehaviour
     public PlayerFightingState fightingState;
     public PlayerJumpingState jumpingState;
     public PlayerMovingState movingState;
+    public PlayerHitState hitState;
+    public PlayerKillState killState;
+    public PlayerKnockBackState knockBackState;
+
     public Rigidbody rigidBody;
     private SpriteRenderer spriteRenderer;
     private Coroutine reposition;
     public IInputable input;
     public Animator animator;
     public GameObject hitTarget;
+
+    [HideInInspector]
+    public float health = 40.0f;
 
     void Start()
     {
@@ -27,6 +34,9 @@ public class Player : MonoBehaviour
         fightingState = new PlayerFightingState(this);
         jumpingState = new PlayerJumpingState(this);
         movingState = new PlayerMovingState(this);
+        hitState = new PlayerHitState(this);
+        killState = new PlayerKillState(this);
+        knockBackState = new PlayerKnockBackState(this);
 
         stateMachine.ChangeState(movingState);
     }
@@ -82,6 +92,20 @@ public class Player : MonoBehaviour
     public GameObject GetHitTarget()
     {
         return this.hitTarget;
+    }
+
+    public void Hit()
+    {
+        health -= 1.0f;
+
+        if (stateMachine.GetCurrentState() == hitState)
+        {
+            hitState.Increment();
+        }
+        else
+        {
+            stateMachine.ChangeState(hitState);
+        }
     }
 }
 

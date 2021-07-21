@@ -8,10 +8,15 @@ public class Enemy : MonoBehaviour
     public StateMachine stateMachine;
     public EnemyChaseState chaseState;
     public EnemyHitState hitState;
+    public EnemyAttackState attackState;
     public EnemyKillState killState;
     public EnemyKnockBackState knockBackState;
+
     public Rigidbody rigidBody;
     public Animator animator;
+
+
+    public GameObject hitTarget;
 
 
     [HideInInspector]
@@ -28,6 +33,7 @@ public class Enemy : MonoBehaviour
         hitState = new EnemyHitState(this);
         killState = new EnemyKillState(this);
         knockBackState = new EnemyKnockBackState(this);
+        attackState = new EnemyAttackState(this);
 
         stateMachine.ChangeState(chaseState);
     }
@@ -35,7 +41,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Health: " + health);
         stateMachine.Update();
     }
 
@@ -56,5 +61,23 @@ public class Enemy : MonoBehaviour
         {
             stateMachine.ChangeState(hitState);
         }
+    }
+
+    public void AttemptAttack()
+    {
+        if (stateMachine.GetCurrentState() != attackState)
+        {
+            stateMachine.ChangeState(attackState);
+        }
+    }
+
+    public void SetHitTarget(GameObject hitTarget)
+    {
+        this.hitTarget = hitTarget;
+    }
+
+    public GameObject getHitTarget()
+    {
+        return this.hitTarget;
     }
 }

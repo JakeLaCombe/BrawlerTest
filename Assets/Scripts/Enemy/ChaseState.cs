@@ -25,9 +25,9 @@ public class EnemyChaseState: IState
         Vector3 target = player.transform.position;
         Vector3 currentPosition = enemy.transform.position;
 
-        if (target.x + 1.5f < currentPosition.x) {
+        if (target.x + 1.25f < currentPosition.x) {
             vx = -2.0f;
-        } else if (target.x - 1.5f > currentPosition.x) {
+        } else if (target.x - 1.25f > currentPosition.x) {
             vx = 2.0f;
         }
 
@@ -46,6 +46,11 @@ public class EnemyChaseState: IState
         }
 
         enemy.animator.SetBool("isRunning", enemy.rigidBody.velocity.x != 0.0f || enemy.rigidBody.velocity.z != 0.0f);
+
+        if (enemy.getHitTarget() != null)
+        {
+            enemy.AttemptAttack();
+        }
     }
 
     public void Exit()
