@@ -48,27 +48,22 @@ public class Player : MonoBehaviour
     {
         stateMachine.Update();
       
-        UpdateShadow();
+        UpdateCamera();
+        UpdateOutOfBounds();
     }
 
-    private void UpdateShadow()
+    private void UpdateCamera()
     {
-        GameObject shadow = this.transform.Find("Shadow").gameObject;
-        LayerMask floorMask = LayerMask.GetMask("Platforms");
-        RaycastHit hit;
-        
-        if (Physics.Raycast(this.transform.position, new Vector3(0.0f, -10.0f, 0.0f), out hit, 20, floorMask))
-        {
-            shadow.transform.position = hit.point - new Vector3(0.0f, 0.5f, 0.0f);
-        }
-
         if (this.transform.position.x > 8 && reposition == null && GameObject.Find("VirtualCamera").activeSelf)
         {
             CinemachineVirtualCamera camera = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
             camera.Follow = null;
             reposition = StartCoroutine(Reposition());
         }
+    }
 
+    private void UpdateOutOfBounds()
+    {
         if (this.transform.position.y - Camera.main.transform.position.y < -Camera.main.orthographicSize * 2)
         {
             this.transform.position = new Vector3(
