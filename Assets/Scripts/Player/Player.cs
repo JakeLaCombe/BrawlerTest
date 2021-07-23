@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public float health = 40.0f;
+    public float maxHealth = 40.0f;
+
 
     void Start()
     {

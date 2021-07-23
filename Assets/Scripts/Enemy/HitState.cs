@@ -24,6 +24,8 @@ public class EnemyHitState: IState
         if (hitEffect) {
             hitEffect = false;
         }
+
+        enemy.transform.Find("EnemyHealth").gameObject.SetActive(true);
     }
     public void Execute()
     {
@@ -35,7 +37,14 @@ public class EnemyHitState: IState
 
        if (enemy.health <= 0.0f)
        {
-           enemy.stateMachine.ChangeState(enemy.killState);
+            enemy.stateMachine.ChangeState(enemy.killState);
+       }
+
+       SmallHealthBar healthBar = enemy.GetComponentInChildren<SmallHealthBar>();
+
+       if (healthBar)
+       {
+            healthBar.SetHealthAmount(enemy.health / enemy.maxHealth);
        }
     }
 
@@ -49,6 +58,7 @@ public class EnemyHitState: IState
         }
 
         hitEffect = true;
+        enemy.transform.Find("EnemyHealth").gameObject.SetActive(false);
     }
 
     public IEnumerator recover()

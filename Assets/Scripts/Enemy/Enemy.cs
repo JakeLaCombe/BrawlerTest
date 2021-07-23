@@ -21,10 +21,11 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector]
     public float health = 40.0f;
+    public float maxHealth = 40.0f;
 
     void Start()
     {
-        health = 20.0f;
+        health = 40.0f;
         rigidBody = GetComponent<Rigidbody>();
         stateMachine = new StateMachine();
         animator = GetComponent<Animator>();

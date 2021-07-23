@@ -16,7 +16,7 @@ public class EnemyKnockBackState: IState
 
     public void Enter()
     {
-        float vx = enemy.transform.localScale.x < 0.0f ? 6.0f : -6.0f;
+        float vx = enemy.transform.localScale.x < 0.0f ? -6.0f : 6.0f;
         enemy.rigidBody.velocity = new Vector3(vx, 3.0f, 0.0f);
         enemy.animator.SetBool("isDead", true);
     }

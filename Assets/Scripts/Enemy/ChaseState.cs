@@ -40,9 +40,9 @@ public class EnemyChaseState: IState
         enemy.rigidBody.velocity = new Vector3(vx, vy, vz);
 
         if (vx < 0) {
-            enemy.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        } else if (vx > 0) {
             enemy.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        } else if (vx > 0) {
+            enemy.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         }
 
         enemy.animator.SetBool("isRunning", enemy.rigidBody.velocity.x != 0.0f || enemy.rigidBody.velocity.z != 0.0f);
