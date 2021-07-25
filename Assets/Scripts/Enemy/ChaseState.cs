@@ -21,20 +21,22 @@ public class EnemyChaseState: IState
         float vx = 0;
         float vy = enemy.rigidBody.velocity.y;
         float vz = 0;
-        
-        Vector3 target = player.transform.position;
-        Vector3 currentPosition = enemy.transform.position;
 
-        if (target.x + 1.25f < currentPosition.x) {
-            vx = -2.0f;
-        } else if (target.x - 1.25f > currentPosition.x) {
-            vx = 2.0f;
-        }
+        if (player != null) {
+            Vector3 target = player.transform.position;
+            Vector3 currentPosition = enemy.transform.position;
 
-        if (target.z + 0.1f < currentPosition.z) {
-            vz = -2.0f;
-        } else if (target.z -0.1f > currentPosition.z) {
-            vz = 2.0f;
+            if (target.x + 1.25f < currentPosition.x) {
+                vx = -2.0f;
+            } else if (target.x - 1.25f > currentPosition.x) {
+                vx = 2.0f;
+            }
+
+            if (target.z + 0.1f < currentPosition.z) {
+                vz = -2.0f;
+            } else if (target.z -0.1f > currentPosition.z) {
+                vz = 2.0f;
+            }
         }
 
         enemy.rigidBody.velocity = new Vector3(vx, vy, vz);

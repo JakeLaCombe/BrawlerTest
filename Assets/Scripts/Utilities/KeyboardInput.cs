@@ -44,6 +44,11 @@ public class KeyboardInput : MonoBehaviour, IInputable
         return Input.GetKey(KeyCode.S);
     }
 
+    public bool JumpHold()
+    {
+        return Input.GetKey(KeyCode.S);
+    }
+
     public bool Pause()
     {
         return Input.GetKeyDown(KeyCode.Return);

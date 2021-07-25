@@ -5,7 +5,7 @@ using UnityEngine;
 public class SmallHealthBar : MonoBehaviour
 {
     private GameObject healthBar;// Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         healthBar = this.transform.Find("HealthContainer").gameObject;
     }

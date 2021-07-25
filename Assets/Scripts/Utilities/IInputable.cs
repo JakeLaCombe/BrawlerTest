@@ -9,6 +9,7 @@ public interface IInputable
     bool Right();
     bool RightHold();
     bool Jump();
+    bool JumpHold();
     bool Pause();
     bool AttackOne();
 }

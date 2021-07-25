@@ -21,6 +21,7 @@ public class PlayerKillState: IState
     }
     public void Execute()
     {
+       player.animator.SetBool("isDead", true);
        player.animator.SetBool("isHit", true);
 
        if (destroyCoroutine == null) {

@@ -9,9 +9,8 @@ public class PlayerJumpingState: IState
 
     public void Enter()
     { 
-        player.animator.SetBool("isRunning", false);
-        player.animator.SetBool("isAirborne", true);
     }
+
     public void Execute()
     {
         float vx = 0;
@@ -20,8 +19,10 @@ public class PlayerJumpingState: IState
 
         if (player.input.LeftHold()) {
             vx = -3.0f;
+            player.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         } else if (player.input.RightHold()) {
             vx = 3.0f;
+            player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
 
         if (player.input.UpHold()) {
@@ -30,8 +31,8 @@ public class PlayerJumpingState: IState
             vz = -3.0f;
         }
 
-        if (player.input.Jump() && player.rigidBody.velocity.y <= Mathf.Abs(float.Epsilon)) {
-            vy = 10.0f;
+        if (!player.input.Jump() && vy > 2.0f) {
+            vy = 2.0f;
         }
 
         player.rigidBody.velocity = new Vector3(
@@ -40,10 +41,15 @@ public class PlayerJumpingState: IState
            vz
         );
 
-        if (Mathf.Abs(vy) < float.Epsilon)
+        player.animator.SetBool("isAirborne", true);
+
+        Debug.Log(float.Epsilon);
+        Debug.Log(Mathf.Abs(vy));
+
+        if (Mathf.Abs(vy) <= 0.0001)
         {
             player.stateMachine.ChangeState(player.movingState);
-        }  
+        } 
     }
 
     public void Exit()

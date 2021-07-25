@@ -9,7 +9,7 @@ public class PlayerMovingState: IState
 
     public void Enter()
     {
-
+        player.animator.SetBool("isAirborne", false);
     }
     public void Execute()
     {

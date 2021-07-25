@@ -6,7 +6,7 @@ public class PlayerHitState: IState
 
     public Player player;
     public int hitCount;
-
+    public Vector3 hitDirection;
     public Coroutine recoverCoroutine;
 
     public bool hitEffect = true;
@@ -63,9 +63,13 @@ public class PlayerHitState: IState
     public void Increment()
     {
         if (hitCount >= 3) {
+            Debug.Log("Switching to Knockback State");
+            player.knockBackState.SetDirection(this.hitDirection);
             player.stateMachine.ChangeState(player.knockBackState);
             return;
         }
+
+        Debug.Log("Uplifting Hits");
 
         hitCount += 1;
 
@@ -75,5 +79,10 @@ public class PlayerHitState: IState
         }
 
         recoverCoroutine = player.StartCoroutine(recover());
+    }
+
+    public void SetDirection(Vector3 hitDirection)
+    {
+        this.hitDirection = hitDirection;
     }
 }

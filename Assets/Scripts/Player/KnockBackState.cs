@@ -6,6 +6,7 @@ public class PlayerKnockBackState: IState
 
     public Player player;
     public Coroutine destroyCoroutine;
+    public Vector3 hitDirection;
 
     public bool hitEffect = true;
 
@@ -16,19 +17,23 @@ public class PlayerKnockBackState: IState
 
     public void Enter()
     {
-        float vx = player.transform.localScale.x < 0.0f ? 6.0f : -6.0f;
-        player.rigidBody.velocity = new Vector3(vx, 3.0f, 0.0f);
+        Debug.Log("Starting Knock Back State");
+        player.rigidBody.velocity = new Vector3(4.0f * hitDirection.x, 3.0f, 0.0f);
         player.animator.SetBool("isDead", true);
         player.animator.SetBool("isRunning", false);
     }
     public void Execute()
     {
+       player.animator.SetBool("isDead", true);
+       player.animator.SetBool("isRunning", false);
+       
        if (destroyCoroutine == null) {
          destroyCoroutine = player.StartCoroutine(StartWalk());
        }
 
        if (player.rigidBody.velocity.y == 0.0f)
        {
+           player.rigidBody.velocity = new Vector3(0.0f, 0.0f, 0.0f);
            player.StopCoroutine(destroyCoroutine);
            AdjustState();
        }
@@ -38,6 +43,11 @@ public class PlayerKnockBackState: IState
     {
         player.animator.SetBool("isHit", false);
         player.animator.SetBool("isDead", false);
+
+        if (destroyCoroutine == null) {
+            player.StopCoroutine(destroyCoroutine);
+        }
+
     }
 
     public IEnumerator StartWalk()
@@ -53,5 +63,10 @@ public class PlayerKnockBackState: IState
         } else {
             player.stateMachine.ChangeState(player.killState);
         }
+    }
+
+    public void SetDirection(Vector3 hitDirection)
+    {
+        this.hitDirection = hitDirection;
     }
 }

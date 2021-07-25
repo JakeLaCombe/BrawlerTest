@@ -56,7 +56,8 @@ public class EnemyAttackState : IState
         if (this.enemy.getHitTarget())
         {
             Player player = this.enemy.getHitTarget().GetComponent<Player>();
-            player.Hit();
+            Vector3 direction = new Vector3(this.enemy.transform.localScale.x * -1.0f, 1.0f, 1.0f);
+            player.Hit(direction);
         }
 
         if (attackChain.Count <= 0)

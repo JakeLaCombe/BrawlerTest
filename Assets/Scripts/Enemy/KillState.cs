@@ -5,7 +5,6 @@ public class EnemyKillState: IState
 {
 
     public Enemy enemy;
-    public Player player;
     public Coroutine destroyCoroutine;
 
     public bool hitEffect = true;

@@ -4,11 +4,8 @@ using UnityEngine;
 public class EnemyHitState: IState
 {
     public Enemy enemy;
-    public Player player;
     public Coroutine recoverCoroutine;
     public int hitCount;
-    public bool hitEffect = true;
-
     public EnemyHitState(Enemy enemy)
     {
         this.enemy = enemy;
@@ -17,19 +14,14 @@ public class EnemyHitState: IState
 
     public void Enter()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         enemy.animator.SetBool("isHit", true);
         hitCount = 0;
-
-        if (hitEffect) {
-            hitEffect = false;
-        }
-
         enemy.transform.Find("EnemyHealth").gameObject.SetActive(true);
     }
     public void Execute()
     {
        enemy.animator.SetBool("isHit", true);
+       enemy.transform.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
 
        if (recoverCoroutine == null) {
          recoverCoroutine = enemy.StartCoroutine(recover());
@@ -57,17 +49,14 @@ public class EnemyHitState: IState
             recoverCoroutine = null;
         }
 
-        hitEffect = true;
         enemy.transform.Find("EnemyHealth").gameObject.SetActive(false);
     }
 
     public IEnumerator recover()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         recoverCoroutine = null;
         enemy.stateMachine.ChangeState(enemy.chaseState);
-
-        hitEffect = true;
         hitCount = 0;
     }
 

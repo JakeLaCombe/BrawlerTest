@@ -48,18 +48,7 @@ public class Player : MonoBehaviour
     {
         stateMachine.Update();
       
-        UpdateCamera();
         UpdateOutOfBounds();
-    }
-
-    private void UpdateCamera()
-    {
-        if (this.transform.position.x > 8 && reposition == null && GameObject.Find("VirtualCamera").activeSelf)
-        {
-            CinemachineVirtualCamera camera = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
-            camera.Follow = null;
-            reposition = StartCoroutine(Reposition());
-        }
     }
 
     private void UpdateOutOfBounds()
@@ -74,13 +63,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator Reposition()
-    {
-        yield return new WaitForSeconds(5.0f);
-        GameObject.Find("VirtualCamera").SetActive(false);
-        CinemachineVirtualCamera camera = GameObject.Find("VirtualCameraSecondary").GetComponent<CinemachineVirtualCamera>();
-    }
-
     public void SetHitTarget(GameObject target)
     {
         this.hitTarget = target;
@@ -91,9 +73,15 @@ public class Player : MonoBehaviour
         return this.hitTarget;
     }
 
-    public void Hit()
+    public void Hit(Vector3 hitDirection)
     {
+        if (stateMachine.GetCurrentState() == knockBackState)
+        {
+            return;
+        }
+
         health -= 1.0f;
+        hitState.SetDirection(hitDirection);
 
         if (stateMachine.GetCurrentState() == hitState)
         {
