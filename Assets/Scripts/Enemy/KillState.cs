@@ -4,12 +4,12 @@ using UnityEngine;
 public class EnemyKillState: IState
 {
 
-    public Enemy enemy;
+    public WolfEnemy enemy;
     public Coroutine destroyCoroutine;
 
     public bool hitEffect = true;
 
-    public EnemyKillState(Enemy enemy)
+    public EnemyKillState(WolfEnemy enemy)
     {
         this.enemy = enemy;
     }

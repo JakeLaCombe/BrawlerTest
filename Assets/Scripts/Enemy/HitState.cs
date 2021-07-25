@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EnemyHitState: IState
 {
-    public Enemy enemy;
+    public WolfEnemy enemy;
     public Coroutine recoverCoroutine;
     public int hitCount;
-    public EnemyHitState(Enemy enemy)
+    public EnemyHitState(WolfEnemy enemy)
     {
         this.enemy = enemy;
         hitCount = 0;

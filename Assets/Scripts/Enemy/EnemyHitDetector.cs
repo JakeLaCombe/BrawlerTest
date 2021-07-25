@@ -6,10 +6,10 @@ public class EnemyHitDetector : MonoBehaviour
 {
     // Start is called before the first frame update
    
-    private Enemy enemy;
+    private WolfEnemy enemy;
     void Start()
     {
-        enemy = this.transform.parent.GetComponent<Enemy>();
+        enemy = this.transform.parent.GetComponent<WolfEnemy>();
     }
 
     void OnTriggerEnter(Collider other)

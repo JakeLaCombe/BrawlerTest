@@ -19,7 +19,7 @@ public class PlayerFightingState: IState
         punchCoroutine = player.StartCoroutine(StopPunch());
         
         if (player.GetHitTarget()) {
-            Enemy enemy = player.GetHitTarget().GetComponent<Enemy>();
+            WolfEnemy enemy = player.GetHitTarget().GetComponent<WolfEnemy>();
             enemy.Hit();
         }
     }
@@ -30,7 +30,7 @@ public class PlayerFightingState: IState
         if(player.input.AttackOne())
         {
             if (player.GetHitTarget()) {
-                Enemy enemy = player.GetHitTarget().GetComponent<Enemy>();
+                WolfEnemy enemy = player.GetHitTarget().GetComponent<WolfEnemy>();
 
                 if (!enemy.isDead())
                 {

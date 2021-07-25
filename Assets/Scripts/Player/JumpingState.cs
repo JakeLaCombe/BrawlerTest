@@ -43,9 +43,6 @@ public class PlayerJumpingState: IState
 
         player.animator.SetBool("isAirborne", true);
 
-        Debug.Log(float.Epsilon);
-        Debug.Log(Mathf.Abs(vy));
-
         if (Mathf.Abs(vy) <= 0.0001)
         {
             player.stateMachine.ChangeState(player.movingState);

@@ -6,12 +6,12 @@ public class EnemyAttackState : IState
 {
     // Start is called before the first frame update
 
-    public Enemy enemy;
+    public WolfEnemy enemy;
     public int hitCount = 3;
     public List<int> attackChain;
     public Coroutine punchCoroutine;
 
-    public EnemyAttackState(Enemy enemy)
+    public EnemyAttackState(WolfEnemy enemy)
     {
         this.enemy = enemy;
     }

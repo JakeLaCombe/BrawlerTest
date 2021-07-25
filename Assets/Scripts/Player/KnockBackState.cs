@@ -17,7 +17,6 @@ public class PlayerKnockBackState: IState
 
     public void Enter()
     {
-        Debug.Log("Starting Knock Back State");
         player.rigidBody.velocity = new Vector3(4.0f * hitDirection.x, 3.0f, 0.0f);
         player.animator.SetBool("isDead", true);
         player.animator.SetBool("isRunning", false);

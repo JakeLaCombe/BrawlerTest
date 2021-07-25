@@ -4,10 +4,10 @@ using UnityEngine;
 public class EnemyChaseState: IState
 {
 
-    public Enemy enemy;
+    public WolfEnemy enemy;
     public Player player;
 
-    public EnemyChaseState(Enemy enemy)
+    public EnemyChaseState(WolfEnemy enemy)
     {
         this.enemy = enemy;
     }

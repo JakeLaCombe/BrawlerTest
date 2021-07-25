@@ -5,7 +5,9 @@ using UnityEngine;
 public class PrefabsManager : MonoBehaviour
 {
     public static PrefabsManager instance;
-    public Enemy enemy;
+    public WolfEnemy enemy;
+    public WolfHowl wolfHowl;
+
     // Start is called before the first frame update
     void Awake()
     {

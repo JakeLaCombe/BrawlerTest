@@ -63,13 +63,10 @@ public class PlayerHitState: IState
     public void Increment()
     {
         if (hitCount >= 3) {
-            Debug.Log("Switching to Knockback State");
             player.knockBackState.SetDirection(this.hitDirection);
             player.stateMachine.ChangeState(player.knockBackState);
             return;
         }
-
-        Debug.Log("Uplifting Hits");
 
         hitCount += 1;
 

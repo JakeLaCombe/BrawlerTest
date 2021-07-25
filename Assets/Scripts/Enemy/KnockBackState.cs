@@ -4,12 +4,12 @@ using UnityEngine;
 public class EnemyKnockBackState: IState
 {
 
-    public Enemy enemy;
+    public WolfEnemy enemy;
     public Coroutine destroyCoroutine;
 
     public bool hitEffect = true;
 
-    public EnemyKnockBackState(Enemy enemy)
+    public EnemyKnockBackState(WolfEnemy enemy)
     {
         this.enemy = enemy;
     }

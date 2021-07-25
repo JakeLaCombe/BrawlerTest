@@ -5,31 +5,62 @@ using UnityEngine;
 public class FightScene : MonoBehaviour
 {
     public int EnemyCount;
-
-    private bool isActive;
     private int RemainingEnemies = 0;
-    private List<Enemy> enemies;    // Start is called before the first frame update
-
+    private WolfHowl wolfHowl;
+    private List<WolfEnemy> enemies;
+    private FightSceneState currentState;   // Start is called before the first frame update
     private Vector3 originalPosition;
     private int ENEMY_SCREEN_COUNT = 5;
 
     void Start()
     {
-        enemies = new List<Enemy>();
-        isActive = false;
+        enemies = new List<WolfEnemy>();
         originalPosition = this.transform.position;
-        Debug.Log("Position");
-        Debug.Log(originalPosition);
+        currentState = FightSceneState.INACTIVE;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isActive) {
-            return;
+        switch(currentState)
+        {
+            case FightSceneState.WOLF_HOWL_INITIAL:
+                InstantiateWolfHowl();
+                break;
+            case FightSceneState.WOLF_HOWL:
+                CheckWolf();
+                break;
+            case FightSceneState.ENEMIES:
+                ProcessEnemies();
+                break;
         }
+    }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (currentState == FightSceneState.INACTIVE) {
+            currentState = FightSceneState.WOLF_HOWL_INITIAL;
+        }
+    }
+
+    private void InstantiateWolfHowl()
+    {
+        Vector3 position = GameObject.FindGameObjectWithTag("Player").transform.position;
+        wolfHowl = GameObject.Instantiate(PrefabsManager.instance.wolfHowl, new Vector3(position.x + 2.0f, 10.0f, position.z), Quaternion.identity);
+        currentState = FightSceneState.WOLF_HOWL;
+    }
+
+    private void CheckWolf()
+    {
+        if (wolfHowl == null) {
+            currentState = FightSceneState.ENEMIES;        
+        }
+    }
+
+    private void ProcessEnemies()
+    {
         if (RemainingEnemies >= EnemyCount && enemies.Count <= 0) {
+            currentState = FightSceneState.FINISHED;
             return;
         }
 
@@ -39,7 +70,6 @@ public class FightScene : MonoBehaviour
             if (enemies.Count > 0) {
                 return;
             }
-
 
             for(int i = 0; i < ENEMY_SCREEN_COUNT; i++) {
                 LayerMask floorMask = LayerMask.GetMask("Platforms");
@@ -63,14 +93,13 @@ public class FightScene : MonoBehaviour
 
         }
     }
+}
 
-    void OnTriggerEnter(Collider other)
-    {
-        isActive = true;    
-    }
-
-    public void Activate()
-    {
-        isActive = true;
-    }
+public enum FightSceneState {
+    INITIAL,
+    INACTIVE,
+    WOLF_HOWL_INITIAL,
+    WOLF_HOWL,    
+    ENEMIES,
+    FINISHED
 }
