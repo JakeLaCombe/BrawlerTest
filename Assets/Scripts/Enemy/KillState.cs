@@ -6,8 +6,9 @@ public class EnemyKillState: IState
 
     public WolfEnemy enemy;
     public Coroutine destroyCoroutine;
+    public float shootDirection = 1.0f;
 
-    public bool hitEffect = true;
+    public bool isShot;
 
     public EnemyKillState(WolfEnemy enemy)
     {
@@ -16,8 +17,13 @@ public class EnemyKillState: IState
 
     public void Enter()
     {
-        float vx = enemy.transform.localScale.x < 0.0f ? 6.0f : -6.0f;
-        enemy.rigidBody.velocity = new Vector3(vx, 3.0f, 0.0f);
+        if (!isShot) {
+            float vx = enemy.transform.localScale.x < 0.0f ? 4.0f : -4.0f;
+            enemy.rigidBody.velocity = new Vector3(vx, 3.0f, 0.0f);
+        } else {
+             enemy.rigidBody.velocity = new Vector3(4.0f * shootDirection, 3.0f, 0.0f);
+        }
+
         enemy.animator.SetBool("isDead", true);
     }
     public void Execute()

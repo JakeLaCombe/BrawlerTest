@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5509247653924583137}
   - component: {fileID: 5509247653924583136}
   - component: {fileID: 5509247653924583139}
+  - component: {fileID: 4539229082150259579}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -155,6 +156,19 @@ MonoBehaviour:
   hitTarget: {fileID: 0}
   health: 40
   maxHealth: 40
+--- !u!65 &4539229082150259579
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5509247653924583141}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 1.2207263}
+  m_Center: {x: 0, y: -3.3393022e-10, z: 0.057641417}
 --- !u!1 &9213475146877603845
 GameObject:
   m_ObjectHideFlags: 0

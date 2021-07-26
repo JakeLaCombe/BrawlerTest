@@ -47,6 +47,17 @@ public class PlayerMovingState: IState
             player.stateMachine.ChangeState(player.fightingState);
         }
 
+        if (player.input.Throw() && vy == 0)
+        {
+            player.animator.SetBool("isPunching", true);
+            Spoon spoon = GameObject.Instantiate(PrefabsManager.instance.spoon, player.attackZone.transform.position, Quaternion.identity);
+            spoon.StartThrow(player.transform.localScale.x);
+        }
+        else
+        {
+            player.animator.SetBool("isPunching", false);
+        }
+
         player.animator.SetBool("isRunning", vx != 0 || vz != 0);
         player.animator.SetBool("isAirborne", false);
     }

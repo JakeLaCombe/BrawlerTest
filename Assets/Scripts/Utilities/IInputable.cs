@@ -12,4 +12,5 @@ public interface IInputable
     bool JumpHold();
     bool Pause();
     bool AttackOne();
+    bool Throw();
 }

@@ -59,6 +59,13 @@ public class FightScene : MonoBehaviour
 
     private void ProcessEnemies()
     {
+        
+        for(int i = 0; i < enemies.Count; i++) {
+            if (enemies[i] == null) {
+                enemies.RemoveAt(0);
+            }
+        }
+
         if (RemainingEnemies >= EnemyCount && enemies.Count <= 0) {
             currentState = FightSceneState.FINISHED;
             return;
@@ -83,14 +90,14 @@ public class FightScene : MonoBehaviour
                     if (collider != null)
                     {
                         Vector3 size = collider.size;
-                        float x = i % 2 == 0 ? Camera.main.orthographicSize : -Camera.main.orthographicSize;
+                        float x = Camera.main.orthographicSize + i * 0.5f;
+                        x = i % 2 == 0 ? -x : x;
                         Vector3 transformPosition = hit.point - new Vector3(x, 0.5f, -size.z / 4);
                         enemies.Add(GameObject.Instantiate(PrefabsManager.instance.enemy, transformPosition, Quaternion.identity));
                         RemainingEnemies += 1;
                     }
                 } 
             }
-
         }
     }
 }

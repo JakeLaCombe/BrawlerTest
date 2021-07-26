@@ -689,7 +689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.218952, y: -3.649562}
+  m_AnchoredPosition: {x: 7.2254114, y: -3.649562}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &519420034
@@ -785,7 +785,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7790698, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -915,6 +915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 5509247653924583139, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
   wolfHowl: {fileID: 4972243765655415397, guid: d6c2658fd99cd7646bc9cca8f6b50a6a, type: 3}
+  spoon: {fileID: 3951919977228677312, guid: 067556cc10d7dc140852bc822b27748a, type: 3}
 --- !u!1 &737885461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,6 +1268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 0}
   animator: {fileID: 0}
+  attackZone: {fileID: 0}
   hitTarget: {fileID: 0}
   health: 40
   maxHealth: 40
@@ -2507,7 +2509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5509247653924583140, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.55
+      value: 12.05
       objectReference: {fileID: 0}
     - target: {fileID: 5509247653924583140, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2551,7 +2553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5509247653924583141, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6983915136748953727, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
       propertyPath: m_IsActive

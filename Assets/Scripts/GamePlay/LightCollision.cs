@@ -17,12 +17,10 @@ public class LightCollision : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Light Collision");
-        Debug.Log(other.gameObject.name);
+      
     }
 
     private void OnTriggerExit(Collider other) {
-        Debug.Log("Left the collision");
-        Debug.Log(other.tag);
+
     }
 }

@@ -7,6 +7,7 @@ public class PrefabsManager : MonoBehaviour
     public static PrefabsManager instance;
     public WolfEnemy enemy;
     public WolfHowl wolfHowl;
+    public Spoon spoon;
 
     // Start is called before the first frame update
     void Awake()

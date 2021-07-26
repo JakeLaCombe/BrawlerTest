@@ -59,6 +59,12 @@ public class KeyboardInput : MonoBehaviour, IInputable
         return Input.GetKeyDown(KeyCode.D);
     }
 
+    public bool Throw()
+    {
+        return Input.GetKeyDown(KeyCode.F);
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {

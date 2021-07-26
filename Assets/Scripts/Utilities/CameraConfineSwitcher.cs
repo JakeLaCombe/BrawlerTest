@@ -20,6 +20,10 @@ public class CameraConfineSwitcher : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
+       if (other.tag != "Player") {
+           return;
+       }
+
        CinemachineConfiner confiner = virtualCamera.GetComponent<CinemachineConfiner>(); 
        confiner.InvalidatePathCache();
        confiner.m_BoundingVolume = colliderSwitch.GetComponent<Collider>();

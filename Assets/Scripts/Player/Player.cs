@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     private Coroutine reposition;
     public IInputable input;
     public Animator animator;
+    public GameObject attackZone;
+
     public GameObject hitTarget;
 
     [HideInInspector]
@@ -39,6 +41,8 @@ public class Player : MonoBehaviour
         hitState = new PlayerHitState(this);
         killState = new PlayerKillState(this);
         knockBackState = new PlayerKnockBackState(this);
+
+        attackZone = this.transform.Find("Player Hit").gameObject;
 
         stateMachine.ChangeState(movingState);
     }
