@@ -7,6 +7,7 @@ public class CameraConfineSwitcher : MonoBehaviour
 {
     public GameObject colliderSwitch;
     public CinemachineVirtualCamera virtualCamera;
+    public CinemachineVirtualCamera swapCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +25,6 @@ public class CameraConfineSwitcher : MonoBehaviour
            return;
        }
 
-       CinemachineConfiner confiner = virtualCamera.GetComponent<CinemachineConfiner>(); 
-       confiner.InvalidatePathCache();
-       confiner.m_BoundingVolume = colliderSwitch.GetComponent<Collider>();
-       confiner.InvalidatePathCache();
+       CameraSwap.SwapCamera(swapCamera);
     }
 }

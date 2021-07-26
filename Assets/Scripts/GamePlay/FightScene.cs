@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class FightScene : MonoBehaviour
 {
     public int EnemyCount;
+    public CinemachineVirtualCamera swapCamera;
     private int RemainingEnemies = 0;
     private WolfHowl wolfHowl;
     private List<WolfEnemy> enemies;
@@ -32,6 +34,10 @@ public class FightScene : MonoBehaviour
                 break;
             case FightSceneState.ENEMIES:
                 ProcessEnemies();
+                break;
+            case FightSceneState.FINISHED:
+                currentState = FightSceneState.TRANSITIONING;
+                StartCoroutine(changeCamera());
                 break;
         }
     }
@@ -100,6 +106,13 @@ public class FightScene : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator changeCamera()
+    {
+        yield return new WaitForSeconds(2.0f);
+        CameraSwap.SwapCamera(swapCamera);
+        Destroy(this.gameObject);
+    }
 }
 
 public enum FightSceneState {
@@ -108,5 +121,6 @@ public enum FightSceneState {
     WOLF_HOWL_INITIAL,
     WOLF_HOWL,    
     ENEMIES,
-    FINISHED
+    FINISHED,
+    TRANSITIONING
 }
