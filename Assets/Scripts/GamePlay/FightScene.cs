@@ -44,6 +44,10 @@ public class FightScene : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.tag != "Player") {
+            return;
+        }
+
         if (currentState == FightSceneState.INACTIVE) {
             currentState = FightSceneState.WOLF_HOWL_INITIAL;
         }

@@ -24,8 +24,12 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public float health = 40.0f;
+
+    [HideInInspector]
     public float maxHealth = 40.0f;
 
+    [HideInInspector]
+    public int silverCount = 0;
 
     void Start()
     {
@@ -95,6 +99,11 @@ public class Player : MonoBehaviour
         {
             stateMachine.ChangeState(hitState);
         }
+    }
+
+    public void AddSilver()
+    {
+        silverCount += 1;
     }
 }
 

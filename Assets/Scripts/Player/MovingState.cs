@@ -47,11 +47,12 @@ public class PlayerMovingState: IState
             player.stateMachine.ChangeState(player.fightingState);
         }
 
-        if (player.input.Throw() && vy == 0)
+        if (player.input.Throw() && vy == 0 && player.silverCount > 0)
         {
             player.animator.SetBool("isPunching", true);
-            Spoon spoon = GameObject.Instantiate(PrefabsManager.instance.spoon, player.attackZone.transform.position, Quaternion.identity);
+            Spoon spoon = GameObject.Instantiate(PrefabsManager.instance.spoon, player.attackZone.transform.position + new Vector3(0.0f, 0.25f, 0.0f), Quaternion.identity);
             spoon.StartThrow(player.transform.localScale.x);
+            player.silverCount -= 1;
         }
         else
         {
