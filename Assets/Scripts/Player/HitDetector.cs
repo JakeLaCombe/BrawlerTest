@@ -15,7 +15,7 @@ public class HitDetector : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            player.SetHitTarget(other.gameObject);
+            player.AddHitTarget(other.gameObject);
         }    
     }
 
@@ -23,7 +23,7 @@ public class HitDetector : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            player.SetHitTarget(null);
+            player.RemoveHitTarget(other.gameObject);
         }    
     }
 }

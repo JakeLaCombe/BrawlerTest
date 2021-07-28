@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public Animator animator;
     public GameObject attackZone;
 
-    public GameObject hitTarget;
+    public List<GameObject> hitTargets;
 
     [HideInInspector]
     public float health = 40.0f;
@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         input = GetComponent<IInputable>();
         stateMachine = new StateMachine();
+
+        hitTargets = new List<GameObject>();
 
         fightingState = new PlayerFightingState(this);
         jumpingState = new PlayerJumpingState(this);
@@ -71,14 +73,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetHitTarget(GameObject target)
+    public void AddHitTarget(GameObject target)
     {
-        this.hitTarget = target;
+        this.hitTargets.Add(target);
     }
 
-    public GameObject GetHitTarget()
+    public void RemoveHitTarget(GameObject target)
     {
-        return this.hitTarget;
+        this.hitTargets.Remove(target);
+    }
+
+    public List<GameObject> GetHitTargets()
+    {
+        return this.hitTargets;
     }
 
     public void Hit(Vector3 hitDirection)

@@ -18,10 +18,20 @@ public class PlayerFightingState: IState
         punchCount = 0;
         punchCoroutine = player.StartCoroutine(StopPunch());
         
-        if (player.GetHitTarget()) {
-            WolfEnemy enemy = player.GetHitTarget().GetComponent<WolfEnemy>();
-            enemy.Hit();
+         foreach (GameObject target in player.GetHitTargets()) {
+            if (target == null) {
+                 player.GetHitTargets().Remove(target);
+                continue;
+            }
+
+            WolfEnemy enemy = target.GetComponent<WolfEnemy>();
+
+            if (!enemy.isDead())
+            {
+                enemy.Hit();
+            }
         }
+
     }
     public void Execute()
     {
@@ -29,8 +39,13 @@ public class PlayerFightingState: IState
 
         if(player.input.AttackOne())
         {
-            if (player.GetHitTarget()) {
-                WolfEnemy enemy = player.GetHitTarget().GetComponent<WolfEnemy>();
+            foreach (GameObject target in player.GetHitTargets()) {
+                if (target == null) {
+                    player.GetHitTargets().Remove(target);
+                    continue;
+                }
+
+                WolfEnemy enemy = target.GetComponent<WolfEnemy>();
 
                 if (!enemy.isDead())
                 {
