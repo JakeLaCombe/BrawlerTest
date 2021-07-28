@@ -20,16 +20,14 @@ public class EnemyKillState: IState
         if (!isShot) {
             float vx = enemy.transform.localScale.x < 0.0f ? 4.0f : -4.0f;
             enemy.rigidBody.velocity = new Vector3(vx, 3.0f, 0.0f);
+            enemy.animator.SetBool("isDead", true);
         } else {
-             enemy.rigidBody.velocity = new Vector3(4.0f * shootDirection, 3.0f, 0.0f);
+            enemy.rigidBody.velocity = new Vector3(4.0f * shootDirection, 3.0f, 0.0f);
+            enemy.animator.SetBool("isSpoonDeath", true);
         }
-
-        enemy.animator.SetBool("isDead", true);
     }
     public void Execute()
     {
-       enemy.animator.SetBool("isHit", true);
-
        if (destroyCoroutine == null) {
          destroyCoroutine = enemy.StartCoroutine(DestroyObject());
        }

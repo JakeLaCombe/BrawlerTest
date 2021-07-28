@@ -66,6 +66,10 @@ public class WolfEnemy : MonoBehaviour
 
     public void InstantKill(GameObject hitObject)
     {
+        if (stateMachine.GetCurrentState() == this.killState) {
+            return;
+        }
+
         Rigidbody thrownRigidBody = hitObject.transform.GetComponent<Rigidbody>();
 
         if (thrownRigidBody != null) {

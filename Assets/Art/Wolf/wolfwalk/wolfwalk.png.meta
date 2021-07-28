@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: 777765113362807994
     second: wolfwalk3
+  - first:
+      213: -2219658023377901749
+    second: wolfwalk4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -95,7 +98,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 35
+        y: 69
         width: 32
         height: 32
       alignment: 0
@@ -116,7 +119,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 35
-        y: 35
+        y: 69
         width: 32
         height: 32
       alignment: 0
@@ -136,8 +139,8 @@ TextureImporter:
       name: wolfwalk2
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
+        x: 69
+        y: 69
         width: 32
         height: 32
       alignment: 0
@@ -157,8 +160,8 @@ TextureImporter:
       name: wolfwalk3
       rect:
         serializedVersion: 2
-        x: 35
-        y: 1
+        x: 1
+        y: 35
         width: 32
         height: 32
       alignment: 0
@@ -170,6 +173,27 @@ TextureImporter:
       bones: []
       spriteID: abc7ea4ff3d2bca00800000000000000
       internalID: 777765113362807994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wolfwalk4
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 35
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b47e6b9b9c03231e0800000000000000
+      internalID: -2219658023377901749
       vertices: []
       indices: 
       edges: []
