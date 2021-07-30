@@ -32,7 +32,7 @@ public class PlayerMovingState: IState
         }
 
         if (player.input.Jump() &&  player.rigidBody.velocity.y <= Mathf.Abs(float.Epsilon)) {
-            vy = 10.0f;
+            vy = 12.0f;
             player.stateMachine.ChangeState(player.jumpingState);
         }
 
@@ -42,12 +42,14 @@ public class PlayerMovingState: IState
            vz
         );
 
-        if (player.input.AttackOne() && vy == 0)
+        bool isFightable = Mathf.Abs(vy) <= 0.0001;
+
+        if (player.input.AttackOne() && isFightable)
         {
             player.stateMachine.ChangeState(player.fightingState);
         }
 
-        if (player.input.Throw() && vy == 0 && player.silverCount > 0)
+        if (player.input.Throw() && isFightable && player.silverCount > 0)
         {
             player.animator.SetBool("isPunching", true);
             Spoon spoon = GameObject.Instantiate(PrefabsManager.instance.spoon, player.attackZone.transform.position + new Vector3(0.0f, 0.25f, 0.0f), Quaternion.identity);

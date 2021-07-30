@@ -28,7 +28,7 @@ public class WolfEnemy : MonoBehaviour
         health = 40.0f;
         rigidBody = GetComponent<Rigidbody>();
         stateMachine = new StateMachine();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         chaseState = new EnemyChaseState(this);
         hitState = new EnemyHitState(this);

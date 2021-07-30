@@ -20,7 +20,7 @@ public class PlayerFightingState: IState
         
          foreach (GameObject target in player.GetHitTargets()) {
             if (target == null) {
-                 player.GetHitTargets().Remove(target);
+                player.GetHitTargets().Remove(target);
                 continue;
             }
 

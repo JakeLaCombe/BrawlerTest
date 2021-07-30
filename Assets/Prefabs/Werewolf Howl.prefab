@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4972243765655415395}
   - component: {fileID: 4972243765655415394}
   - component: {fileID: 4972243765655415397}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Werewolf Howl
   m_TagString: Untagged
   m_Icon: {fileID: 0}

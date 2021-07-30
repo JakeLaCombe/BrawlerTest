@@ -8,7 +8,9 @@ public class PlayerJumpingState: IState
     }
 
     public void Enter()
-    { 
+    {
+        Transform gameCollider = player.transform.Find("Floor Collider");
+        gameCollider.gameObject.SetActive(false);
     }
 
     public void Execute()
@@ -16,6 +18,7 @@ public class PlayerJumpingState: IState
         float vx = 0;
         float vy =  player.rigidBody.velocity.y;
         float vz = 0;
+        Transform gameCollider = player.transform.Find("Floor Collider");
 
         if (player.input.LeftHold()) {
             vx = -3.0f;
@@ -43,8 +46,13 @@ public class PlayerJumpingState: IState
 
         player.animator.SetBool("isAirborne", true);
 
+        if (vy < 0.0f) {
+            gameCollider.gameObject.SetActive(vy < 0.0f);
+        }
+
         if (Mathf.Abs(vy) <= 0.0001)
         {
+            gameCollider.gameObject.SetActive(true);
             player.stateMachine.ChangeState(player.movingState);
         } 
     }
@@ -53,5 +61,7 @@ public class PlayerJumpingState: IState
     {
         player.animator.SetBool("isRunning", true);
         player.animator.SetBool("isAirborne", false);
+        Transform gameCollider = player.transform.Find("Floor Collider");
+        gameCollider.gameObject.SetActive(true);
     }
 }

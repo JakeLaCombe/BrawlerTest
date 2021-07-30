@@ -6,11 +6,11 @@ public class Shadow : MonoBehaviour
 {
     // Start is called before the first frame update
     // Update is called once per frame
-    private SpriteRenderer renderer;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();    
+        spriteRenderer = GetComponent<SpriteRenderer>();    
     }
     void Update()
     {
@@ -20,11 +20,11 @@ public class Shadow : MonoBehaviour
         if (Physics.Raycast(this.transform.parent.transform.position, new Vector3(0.0f, -10.0f, 0.0f), out hit, 20, floorMask))
         {
             this.transform.position = hit.point - new Vector3(0.0f, 0.5f, 0.0f);
-            renderer.enabled = true;
+            spriteRenderer.enabled = true;
         }
         else
         {
-            renderer.enabled = false;
+            spriteRenderer.enabled = false;
         }
     }
 }

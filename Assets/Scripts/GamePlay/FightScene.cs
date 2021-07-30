@@ -55,7 +55,7 @@ public class FightScene : MonoBehaviour
 
     private void InstantiateWolfHowl()
     {
-        Vector3 position = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector3 position = this.transform.position;
         wolfHowl = GameObject.Instantiate(PrefabsManager.instance.wolfHowl, new Vector3(position.x + 2.0f, 10.0f, position.z), Quaternion.identity);
         currentState = FightSceneState.WOLF_HOWL;
     }
@@ -100,9 +100,9 @@ public class FightScene : MonoBehaviour
                     if (collider != null)
                     {
                         Vector3 size = collider.size;
-                        float x = Camera.main.orthographicSize + i * 0.5f;
+                        float x = Camera.main.orthographicSize * 2 + i * 0.5f;
                         x = i % 2 == 0 ? -x : x;
-                        Vector3 transformPosition = hit.point - new Vector3(x, 0.5f, -size.z / 4);
+                        Vector3 transformPosition = hit.point - new Vector3(x, -1.0f, 0);
                         enemies.Add(GameObject.Instantiate(PrefabsManager.instance.enemy, transformPosition, Quaternion.identity));
                         RemainingEnemies += 1;
                     }
