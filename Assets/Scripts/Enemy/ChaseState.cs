@@ -18,6 +18,10 @@ public class EnemyChaseState: IState
     }
     public void Execute()
     {
+        if (!player.isPlayerControlled()) {
+            return;
+        }
+
         float vx = 0;
         float vy = enemy.rigidBody.velocity.y;
         float vz = 0;

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public PlayerHitState hitState;
     public PlayerKillState killState;
     public PlayerKnockBackState knockBackState;
+    public LevelStartState startState;
 
     public Rigidbody rigidBody;
     private SpriteRenderer spriteRenderer;
@@ -47,10 +48,11 @@ public class Player : MonoBehaviour
         hitState = new PlayerHitState(this);
         killState = new PlayerKillState(this);
         knockBackState = new PlayerKnockBackState(this);
+        startState = new LevelStartState(this);
 
         attackZone = this.transform.Find("Player Hit").gameObject;
 
-        stateMachine.ChangeState(movingState);
+        stateMachine.ChangeState(startState);
     }
 
     // Update is called once per frame
@@ -111,6 +113,11 @@ public class Player : MonoBehaviour
     public void AddSilver()
     {
         silverCount += 1;
+    }
+
+    public bool isPlayerControlled()
+    {
+        return this.stateMachine.GetCurrentState() != startState;
     }
 }
 
