@@ -17,10 +17,11 @@ public class PlayerFightingState: IState
     {
         punchCount = 0;
         punchCoroutine = player.StartCoroutine(StopPunch());
+        List<GameObject> enemiesToRemove = new List<GameObject>();
         
          foreach (GameObject target in player.GetHitTargets()) {
             if (target == null) {
-                player.GetHitTargets().Remove(target);
+                enemiesToRemove.Add(target);
                 continue;
             }
 
@@ -32,12 +33,16 @@ public class PlayerFightingState: IState
             }
         }
 
+        foreach(GameObject enemy in enemiesToRemove) {
+            player.GetHitTargets().Remove(enemy);
+        }
+
     }
     public void Execute()
     {
         player.rigidBody.velocity = new Vector3(0.0f, 0.0f, 0.0f);
 
-        if(player.input.AttackOne())
+        if (player.input.AttackOne())
         {
             foreach (GameObject target in player.GetHitTargets()) {
                 if (target == null) {

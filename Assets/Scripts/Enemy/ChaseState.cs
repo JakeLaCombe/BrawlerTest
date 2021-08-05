@@ -26,7 +26,7 @@ public class EnemyChaseState: IState
         float vy = enemy.rigidBody.velocity.y;
         float vz = 0;
 
-        if (player != null) {
+        if (player != null && Mathf.Abs(player.transform.position.x - enemy.transform.position.x) < 20) {
             Vector3 target = player.transform.position;
             Vector3 currentPosition = enemy.transform.position;
 

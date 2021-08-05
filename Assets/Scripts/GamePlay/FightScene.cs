@@ -100,7 +100,7 @@ public class FightScene : MonoBehaviour
                     if (collider != null)
                     {
                         Vector3 size = collider.size;
-                        float x = Camera.main.orthographicSize * 2 + i * 0.5f;
+                        float x = Camera.main.orthographicSize + i * 0.5f;
                         x = i % 2 == 0 ? -x : x;
                         Vector3 transformPosition = hit.point - new Vector3(x, -1.0f, 0);
                         enemies.Add(GameObject.Instantiate(PrefabsManager.instance.enemy, transformPosition, Quaternion.identity));

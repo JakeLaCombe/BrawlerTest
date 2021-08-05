@@ -44,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Buildings
+    uniqueID: 935989249
+    locked: 0
   - name: Sprites
     uniqueID: 879648647
     locked: 0
