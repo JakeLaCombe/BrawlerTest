@@ -13,6 +13,8 @@ public class WolfEnemy : MonoBehaviour
     public EnemyKnockBackState knockBackState;
 
     public Rigidbody rigidBody;
+    public SpriteRenderer[] spriteRenderers;
+    public Shadow shadow;
     public Animator animator;
 
 
@@ -29,6 +31,8 @@ public class WolfEnemy : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         stateMachine = new StateMachine();
         animator = GetComponentInChildren<Animator>();
+        shadow = GetComponentInChildren<Shadow>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 
         chaseState = new EnemyChaseState(this);
         hitState = new EnemyHitState(this);
@@ -43,6 +47,25 @@ public class WolfEnemy : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+
+        UpdateRenderTag();
+    }
+
+
+    private void UpdateRenderTag()
+    {
+        if (shadow.GetFloorTag() == "NonFloorPlatform")
+        {
+            foreach(SpriteRenderer spriteRenderer in spriteRenderers) {
+                spriteRenderer.sortingLayerName = "Platforms";
+            }
+        }
+        else
+        {
+            foreach(SpriteRenderer spriteRenderer in spriteRenderers) {
+                spriteRenderer.sortingLayerName = "Sprites";
+            }
+        }
     }
 
     public bool isDead()
@@ -66,13 +89,15 @@ public class WolfEnemy : MonoBehaviour
 
     public void InstantKill(GameObject hitObject)
     {
-        if (stateMachine.GetCurrentState() == this.killState) {
+        if (stateMachine.GetCurrentState() == this.killState)
+        {
             return;
         }
 
         Rigidbody thrownRigidBody = hitObject.transform.GetComponent<Rigidbody>();
 
-        if (thrownRigidBody != null) {
+        if (thrownRigidBody != null)
+        {
             this.killState.isShot = true;
             this.killState.shootDirection = Mathf.Abs(thrownRigidBody.velocity.x) / thrownRigidBody.velocity.x;
         }

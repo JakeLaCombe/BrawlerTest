@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - MoveCamera
   - StopCamera
+  - NonFloorPlatform
+  - DeathFloor
+  - FightSpawnPoint
   layers:
   - Default
   - TransparentFX
@@ -47,9 +50,15 @@ TagManager:
   - name: Buildings
     uniqueID: 935989249
     locked: 0
+  - name: PlatformFronts
+    uniqueID: 1493294809
+    locked: 0
   - name: Sprites
     uniqueID: 879648647
     locked: 0
   - name: Health Bar
     uniqueID: 2316881701
+    locked: 0
+  - name: Platforms
+    uniqueID: 961736979
     locked: 0

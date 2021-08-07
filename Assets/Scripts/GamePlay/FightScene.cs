@@ -12,6 +12,8 @@ public class FightScene : MonoBehaviour
     private List<WolfEnemy> enemies;
     private FightSceneState currentState;   // Start is called before the first frame update
     private Vector3 originalPosition;
+
+    public GameObject[] spawnPoints;
     private int ENEMY_SCREEN_COUNT = 5;
 
     void Start()
@@ -19,6 +21,21 @@ public class FightScene : MonoBehaviour
         enemies = new List<WolfEnemy>();
         originalPosition = this.transform.position;
         currentState = FightSceneState.INACTIVE;
+
+        spawnPoints = getSpawnPoints();
+    }
+
+    public GameObject[] getSpawnPoints()
+    {
+        List<GameObject> spawnPoints = new List<GameObject>();
+        foreach (Transform t in GetComponentsInChildren<Transform>())
+        {
+            if (t.tag == "FightSpawnPoint") {
+                spawnPoints.Add(t.gameObject);
+            }
+        }   
+        
+        return spawnPoints.ToArray();
     }
 
     // Update is called once per frame
@@ -98,11 +115,8 @@ public class FightScene : MonoBehaviour
                     BoxCollider collider = hit.collider.gameObject.GetComponent<BoxCollider>();
 
                     if (collider != null)
-                    {
-                        Vector3 size = collider.size;
-                        float x = Camera.main.orthographicSize + i * 0.5f;
-                        x = i % 2 == 0 ? -x : x;
-                        Vector3 transformPosition = hit.point - new Vector3(x, -1.0f, 0);
+                    {                 
+                        Vector3 transformPosition = spawnPoints[i].transform.position - new Vector3(0.0f, -5.0f, 0);
                         enemies.Add(GameObject.Instantiate(PrefabsManager.instance.enemy, transformPosition, Quaternion.identity));
                         RemainingEnemies += 1;
                     }

@@ -30,7 +30,7 @@ public class PlayerJumpingState: IState
 
         if (player.input.UpHold()) {
             vz = 3.0f;
-        } else if (player.input.UpHold()) {
+        } else if (player.input.DownHold()) {
             vz = -3.0f;
         }
 

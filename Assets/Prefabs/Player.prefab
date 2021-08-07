@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 975768615113226092}
   - component: {fileID: 975768615113226099}
   m_Layer: 6
-  m_Name: PlayerSprite
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 879648647
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: 961736979
+  m_SortingLayer: 5
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1208658265420532065, guid: 97033f6a41a433b4a9d18e5fbf90ba7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -145,8 +145,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6737597, y: 0.07297039, z: 0.5695281}
-  m_Center: {x: -0.16312015, y: -0.4635148, z: -0.11663985}
+  m_Size: {x: 0.3549347, y: 0.06974983, z: 0.37216997}
+  m_Center: {x: -0.1328888, y: -0.46190453, z: -0.21531892}
 --- !u!1 &975768615309878795
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,11 +209,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975768615309878795}
   m_Material: {fileID: 13400000, guid: bcfdb5ded3d1769479834a5f534bebeb, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5772133, y: 1, z: 0.44205475}
+  m_Center: {x: -0.34185982, y: 0, z: 0.027744293}
 --- !u!114 &975768615309878784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +229,7 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   animator: {fileID: 0}
   attackZone: {fileID: 0}
+  shadow: {fileID: 0}
   hitTargets: []
   health: 40
   maxHealth: 40
@@ -356,6 +357,18 @@ PrefabInstance:
     - target: {fileID: 6785216683152468373, guid: a469107b828fe8c45a5f62baed764863, type: 3}
       propertyPath: m_Name
       value: Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785216683152468375, guid: a469107b828fe8c45a5f62baed764863, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785216683152468375, guid: a469107b828fe8c45a5f62baed764863, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785216683152468375, guid: a469107b828fe8c45a5f62baed764863, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 961736979
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a469107b828fe8c45a5f62baed764863, type: 3}

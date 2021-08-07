@@ -15,11 +15,12 @@ public class Player : MonoBehaviour
     public LevelStartState startState;
 
     public Rigidbody rigidBody;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer[] spriteRenderers;
     private Coroutine reposition;
     public IInputable input;
     public Animator animator;
     public GameObject attackZone;
+    public Shadow shadow;
 
     public List<GameObject> hitTargets;
 
@@ -35,9 +36,11 @@ public class Player : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
         input = GetComponent<IInputable>();
+        shadow = GetComponentInChildren<Shadow>();
+
         stateMachine = new StateMachine();
 
         hitTargets = new List<GameObject>();
@@ -61,6 +64,27 @@ public class Player : MonoBehaviour
         stateMachine.Update();
       
         UpdateOutOfBounds();
+        UpdateRenderTag();
+    }
+
+    private void UpdateRenderTag()
+    {
+        if (shadow.GetFloorTag() == "NonFloorPlatform")
+        {
+            foreach(SpriteRenderer spriteRenderer in spriteRenderers)
+            {
+                shadow.spriteRenderer.sortingLayerID = SortingLayer.NameToID("Platforms");
+                shadow.spriteRenderer.sortingOrder = 1;
+            }
+        }
+        else
+        {
+             foreach(SpriteRenderer spriteRenderer in spriteRenderers)
+            {
+                shadow.spriteRenderer.sortingLayerID = SortingLayer.NameToID("Sprites");
+                shadow.spriteRenderer.sortingOrder = 1;
+            }
+        }
     }
 
     private void UpdateOutOfBounds()
@@ -118,6 +142,12 @@ public class Player : MonoBehaviour
     public bool isPlayerControlled()
     {
         return this.stateMachine.GetCurrentState() != startState;
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "DeathFloor") {
+            this.transform.position = new Vector3(this.transform.position.x, -2.2f, this.transform.position.z);
+        }
     }
 }
 

@@ -5,7 +5,6 @@ using Cinemachine;
 
 public class CameraConfineSwitcher : MonoBehaviour
 {
-    public GameObject colliderSwitch;
     public CinemachineVirtualCamera swapCamera;
     // Start is called before the first frame update
     void Start()

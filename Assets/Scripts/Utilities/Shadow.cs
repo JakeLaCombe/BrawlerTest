@@ -6,7 +6,10 @@ public class Shadow : MonoBehaviour
 {
     // Start is called before the first frame update
     // Update is called once per frame
-    private SpriteRenderer spriteRenderer;
+    [HideInInspector]
+    public SpriteRenderer spriteRenderer;
+
+    private string floorTag;
 
     void Start()
     {
@@ -21,10 +24,17 @@ public class Shadow : MonoBehaviour
         {
             this.transform.position = hit.point - new Vector3(0.0f, 0.5f, 0.0f);
             spriteRenderer.enabled = true;
+            floorTag = hit.transform.gameObject.tag;
         }
         else
         {
             spriteRenderer.enabled = false;
+            floorTag = "";
         }
+    }
+
+    public string GetFloorTag()
+    {
+        return floorTag;
     }
 }
