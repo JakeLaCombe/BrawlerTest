@@ -43,13 +43,28 @@ public class EnemyChaseState: IState
             }
         }
 
-        enemy.rigidBody.velocity = new Vector3(vx, vy, vz);
-
         if (vx < 0) {
             enemy.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         } else if (vx > 0) {
             enemy.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         }
+
+        if (enemy.floorDetectorHorizontal.GetFloor() == "")
+        {
+            vx = 0;
+        }
+
+        if (enemy.floorDetectorUp.GetFloor() == "" && vz > 0.0f)
+        {
+            vz = 0;
+        }
+
+        if (enemy.floorDetectorDown.GetFloor() == "" && vz < 0.0f)
+        {
+            vz = 0;
+        }
+
+        enemy.rigidBody.velocity = new Vector3(vx, vy, vz);
 
         enemy.animator.SetBool("isRunning", enemy.rigidBody.velocity.x != 0.0f || enemy.rigidBody.velocity.z != 0.0f);
 

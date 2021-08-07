@@ -16,6 +16,9 @@ public class WolfEnemy : MonoBehaviour
     public SpriteRenderer[] spriteRenderers;
     public Shadow shadow;
     public Animator animator;
+    public FloorDetector floorDetectorUp;
+    public FloorDetector floorDetectorDown;
+    public FloorDetector floorDetectorHorizontal;
 
 
     public GameObject hitTarget;
@@ -33,6 +36,9 @@ public class WolfEnemy : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         shadow = GetComponentInChildren<Shadow>();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        floorDetectorUp = this.transform.Find("FloorDetectorUp").GetComponentInChildren<FloorDetector>();
+        floorDetectorHorizontal = this.transform.Find("FloorDetectorHorizontal").GetComponentInChildren<FloorDetector>();
+        floorDetectorDown = this.transform.Find("FloorDetectorDown").GetComponentInChildren<FloorDetector>();
 
         chaseState = new EnemyChaseState(this);
         hitState = new EnemyHitState(this);
@@ -58,12 +64,14 @@ public class WolfEnemy : MonoBehaviour
         {
             foreach(SpriteRenderer spriteRenderer in spriteRenderers) {
                 spriteRenderer.sortingLayerName = "Platforms";
+                spriteRenderer.sortingOrder = 1;
             }
         }
         else
         {
             foreach(SpriteRenderer spriteRenderer in spriteRenderers) {
                 spriteRenderer.sortingLayerName = "Sprites";
+                spriteRenderer.sortingOrder = 1;
             }
         }
     }
@@ -121,5 +129,11 @@ public class WolfEnemy : MonoBehaviour
     public GameObject getHitTarget()
     {
         return this.hitTarget;
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "DeathFloor") {
+            Destroy(this.gameObject);
+        }
     }
 }
