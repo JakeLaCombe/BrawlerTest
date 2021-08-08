@@ -129,6 +129,13 @@ public class FightScene : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         CameraSwap.SwapCamera(swapCamera);
+
+        IFightEndEvent lastEvent = GetComponent<IFightEndEvent>();
+
+        if (lastEvent != null) {
+            lastEvent.ActivateEvent();
+        }
+
         Destroy(this.gameObject);
     }
 }

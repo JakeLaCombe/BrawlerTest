@@ -22,9 +22,9 @@ public class EnemyChaseState: IState
             return;
         }
 
-        float vx = 0;
+        float vx = enemy.rigidBody.velocity.x;
         float vy = enemy.rigidBody.velocity.y;
-        float vz = 0;
+        float vz = enemy.rigidBody.velocity.z;
 
         if (player != null && Mathf.Abs(player.transform.position.x - enemy.transform.position.x) < 20) {
             Vector3 target = player.transform.position;
@@ -51,6 +51,7 @@ public class EnemyChaseState: IState
 
         if (enemy.floorDetectorHorizontal.GetFloor() == "")
         {
+            Debug.Log("Nothing To Move"); 
             vx = 0;
         }
 

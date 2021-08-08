@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public PlayerKnockBackState knockBackState;
     public LevelStartState startState;
     public LevelEndJumpState levelEndJumpState;
+    public LevelEndMoveState levelEndMoveState;
+
 
     public Rigidbody rigidBody;
     public SpriteRenderer spriteRenderer;
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
         knockBackState = new PlayerKnockBackState(this);
         startState = new LevelStartState(this);
         levelEndJumpState = new LevelEndJumpState(this);
+        levelEndMoveState = new LevelEndMoveState(this);
 
         attackZone = this.transform.Find("Player Hit").gameObject;
 
@@ -154,6 +157,12 @@ public class Player : MonoBehaviour
                 stateMachine.ChangeState(levelEndJumpState);
             }
         }
+    }
+
+    public void moveToEnd(Vector3 target)
+    {
+        levelEndMoveState.SetTarget(target);
+        stateMachine.ChangeState(levelEndMoveState);
     }
 }
 

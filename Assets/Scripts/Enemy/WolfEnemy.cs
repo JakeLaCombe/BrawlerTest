@@ -55,6 +55,7 @@ public class WolfEnemy : MonoBehaviour
         stateMachine.Update();
 
         UpdateRenderTag();
+        UpdateOutOfBounds();
     }
 
 
@@ -134,6 +135,14 @@ public class WolfEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "DeathFloor") {
             Destroy(this.gameObject);
+        }
+    }
+
+    private void UpdateOutOfBounds()
+    {
+        if (this.transform.position.y - Camera.main.transform.position.y < -Camera.main.orthographicSize * 2)
+        {
+          Destroy(this.gameObject);
         }
     }
 }
