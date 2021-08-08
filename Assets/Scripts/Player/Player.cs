@@ -13,9 +13,10 @@ public class Player : MonoBehaviour
     public PlayerKillState killState;
     public PlayerKnockBackState knockBackState;
     public LevelStartState startState;
+    public LevelEndJumpState levelEndJumpState;
 
     public Rigidbody rigidBody;
-    private SpriteRenderer[] spriteRenderers;
+    public SpriteRenderer spriteRenderer;
     private Coroutine reposition;
     public IInputable input;
     public Animator animator;
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        spriteRenderer = this.transform.Find("Sprite").GetComponent<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
         input = GetComponent<IInputable>();
         shadow = GetComponentInChildren<Shadow>();
@@ -52,6 +53,7 @@ public class Player : MonoBehaviour
         killState = new PlayerKillState(this);
         knockBackState = new PlayerKnockBackState(this);
         startState = new LevelStartState(this);
+        levelEndJumpState = new LevelEndJumpState(this);
 
         attackZone = this.transform.Find("Player Hit").gameObject;
 
@@ -71,19 +73,13 @@ public class Player : MonoBehaviour
     {
         if (shadow.GetFloorTag() == "NonFloorPlatform")
         {
-            foreach(SpriteRenderer spriteRenderer in spriteRenderers)
-            {
-                shadow.spriteRenderer.sortingLayerID = SortingLayer.NameToID("Platforms");
-                shadow.spriteRenderer.sortingOrder = 1;
-            }
+            shadow.spriteRenderer.sortingLayerID = SortingLayer.NameToID("Platforms");
+            shadow.spriteRenderer.sortingOrder = 1;
         }
         else
         {
-             foreach(SpriteRenderer spriteRenderer in spriteRenderers)
-            {
-                shadow.spriteRenderer.sortingLayerID = SortingLayer.NameToID("Sprites");
-                shadow.spriteRenderer.sortingOrder = 1;
-            }
+            shadow.spriteRenderer.sortingLayerID = SortingLayer.NameToID("Sprites");
+            shadow.spriteRenderer.sortingOrder = 1;
         }
     }
 
@@ -147,6 +143,16 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "DeathFloor") {
             this.transform.position = new Vector3(this.transform.position.x, -2.2f, this.transform.position.z);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+         if (other.gameObject.tag == "LevelComplete") {
+            string name =  other.transform.parent.name;
+
+            if (stateMachine.GetCurrentState() != levelEndJumpState) {
+                stateMachine.ChangeState(levelEndJumpState);
+            }
         }
     }
 }

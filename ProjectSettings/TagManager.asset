@@ -10,6 +10,7 @@ TagManager:
   - NonFloorPlatform
   - DeathFloor
   - FightSpawnPoint
+  - LevelComplete
   layers:
   - Default
   - TransparentFX
@@ -56,9 +57,9 @@ TagManager:
   - name: Sprites
     uniqueID: 879648647
     locked: 0
-  - name: Health Bar
-    uniqueID: 2316881701
-    locked: 0
   - name: Platforms
     uniqueID: 961736979
+    locked: 0
+  - name: Health Bar
+    uniqueID: 2316881701
     locked: 0
