@@ -51,6 +51,7 @@ public class PlayerMovingState: IState
 
         if (player.input.Throw() && isFightable && player.silverCount > 0)
         {
+            SoundManager.instance.Throw.Play();
             player.animator.SetBool("isPunching", true);
             Spoon spoon = GameObject.Instantiate(PrefabsManager.instance.spoon, player.attackZone.transform.position + new Vector3(0.0f, 0.25f, 0.0f), Quaternion.identity);
             spoon.StartThrow(player.transform.localScale.x);

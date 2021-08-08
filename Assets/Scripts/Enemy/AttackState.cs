@@ -49,6 +49,7 @@ public class EnemyAttackState : IState
     public IEnumerator switchAttack()
     {
         yield return new WaitForSeconds(0.5f);
+        SoundManager.instance.Punch.Play();
         this.enemy.animator.SetInteger("attackType", attackChain[0]);
         attackChain.RemoveAt(0);
         this.enemy.animator.SetBool("isAttacking", attackChain.Count == 0);

@@ -11,6 +11,7 @@ public class SpoonPickup : MonoBehaviour
            return;
        }
 
+       SoundManager.instance.Pickup.Play();
        Player player = other.GetComponent<Player>();
        player.AddSilver();
        Destroy(this.gameObject);
