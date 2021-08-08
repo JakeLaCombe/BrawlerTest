@@ -29,7 +29,6 @@ public class LevelEndMoveState : IState
         this.player.animator.SetBool("isRunning", true);
         this.player.rigidBody.velocity = new Vector3(targetVelocity.x * 2, 0.0f, targetVelocity.z * 2);
 
-        Debug.Log(this.player.rigidBody.velocity);
         if (Mathf.Abs(this.player.rigidBody.velocity.x) <= 1 && Mathf.Abs(this.player.rigidBody.velocity.z) < 1)
         {
             SceneManager.LoadScene("Level Two");

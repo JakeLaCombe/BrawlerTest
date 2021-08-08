@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 186908983}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1253,7 +1253,7 @@ GameObject:
   - component: {fileID: 281996513}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1612,7 +1612,7 @@ GameObject:
   - component: {fileID: 376508934}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2198,7 +2198,7 @@ GameObject:
   - component: {fileID: 607377032}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2463,7 +2463,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 286453010928509014, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
   m_PrefabInstance: {fileID: 5509247653430723397}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &625005121
+--- !u!114 &625005124
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42106,7 +42106,7 @@ GameObject:
   - component: {fileID: 947846210}
   m_Layer: 0
   m_Name: Area Light (5)
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42927,7 +42927,7 @@ GameObject:
   - component: {fileID: 1104209191}
   m_Layer: 0
   m_Name: Area Light (4)
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43022,7 +43022,7 @@ GameObject:
   - component: {fileID: 1124741798}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43079,7 +43079,7 @@ GameObject:
   - component: {fileID: 1145190262}
   m_Layer: 0
   m_Name: Area Light (3)
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43248,7 +43248,7 @@ GameObject:
   - component: {fileID: 1180799461}
   m_Layer: 0
   m_Name: Area Light (1)
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43696,7 +43696,7 @@ GameObject:
   - component: {fileID: 1294345254}
   m_Layer: 0
   m_Name: Area Light (2)
-  m_TagString: Untagged
+  m_TagString: MoonLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85081,6 +85081,18 @@ PrefabInstance:
     - target: {fileID: 4134959260987337225, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.551
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760913479764898623, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760913479764898623, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760913479764898623, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5509247653924583140, guid: 458075181ff9f1c409848e0ec5a758ab, type: 3}
       propertyPath: m_RootOrder

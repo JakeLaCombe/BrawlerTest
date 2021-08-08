@@ -11,6 +11,7 @@ TagManager:
   - DeathFloor
   - FightSpawnPoint
   - LevelComplete
+  - MoonLight
   layers:
   - Default
   - TransparentFX

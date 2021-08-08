@@ -11,9 +11,12 @@ public class WolfEnemy : MonoBehaviour
     public EnemyAttackState attackState;
     public EnemyKillState killState;
     public EnemyKnockBackState knockBackState;
+    public bool isMoonLightCharged = false;
 
     public Rigidbody rigidBody;
     public SpriteRenderer[] spriteRenderers;
+
+    public SpriteRenderer mainRenderer;
     public Shadow shadow;
     public Animator animator;
     public FloorDetector floorDetectorUp;
@@ -36,6 +39,7 @@ public class WolfEnemy : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         shadow = GetComponentInChildren<Shadow>();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        mainRenderer = this.transform.Find("Sprite").GetComponent<SpriteRenderer>();
         floorDetectorUp = this.transform.Find("FloorDetectorUp").GetComponentInChildren<FloorDetector>();
         floorDetectorHorizontal = this.transform.Find("FloorDetectorHorizontal").GetComponentInChildren<FloorDetector>();
         floorDetectorDown = this.transform.Find("FloorDetectorDown").GetComponentInChildren<FloorDetector>();
@@ -56,8 +60,21 @@ public class WolfEnemy : MonoBehaviour
 
         UpdateRenderTag();
         UpdateOutOfBounds();
+        UpdateMoonCharge();
     }
 
+
+    private void UpdateMoonCharge()
+    {
+        if (isMoonLightCharged)
+        {
+            mainRenderer.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        }
+        else
+        {
+            mainRenderer.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        }
+    }
 
     private void UpdateRenderTag()
     {
@@ -84,7 +101,10 @@ public class WolfEnemy : MonoBehaviour
 
     public void Hit()
     {
-        health -= 1.0f;
+        if (!isMoonLightCharged)
+        {
+            health -= 1.0f;
+        }
 
         if (stateMachine.GetCurrentState() == hitState)
         {
@@ -135,6 +155,22 @@ public class WolfEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "DeathFloor") {
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "MoonLight")
+        {
+            isMoonLightCharged = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "MoonLight")
+        {
+            isMoonLightCharged = false;
         }
     }
 
