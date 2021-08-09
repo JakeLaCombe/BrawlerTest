@@ -86,11 +86,17 @@ public class FightScene : MonoBehaviour
 
     private void ProcessEnemies()
     {
-        
+        List<WolfEnemy> enemiesToRemove = new List<WolfEnemy>();
+
         for(int i = 0; i < enemies.Count; i++) {
             if (enemies[i] == null) {
-                enemies.RemoveAt(0);
+                enemiesToRemove.Add(enemies[i]);
             }
+        }
+
+        foreach(WolfEnemy enemy in enemiesToRemove)
+        {
+            enemies.Remove(enemy);
         }
 
         if (RemainingEnemies >= EnemyCount && enemies.Count <= 0) {

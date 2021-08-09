@@ -45,12 +45,12 @@ public class PlayerFightingState: IState
 
         if (player.input.AttackOne())
         {
-            Debug.Log("Hit");
             SoundManager.instance.Punch.Play();
+            List<GameObject> enemiesToRemove = new List<GameObject>();
 
             foreach (GameObject target in player.GetHitTargets()) {
                 if (target == null) {
-                    player.GetHitTargets().Remove(target);
+                    enemiesToRemove.Add(target);
                     continue;
                 }
 
@@ -60,6 +60,10 @@ public class PlayerFightingState: IState
                 {
                     enemy.Hit();
                 }
+            }
+
+            foreach(GameObject enemy in enemiesToRemove) {
+                player.GetHitTargets().Remove(enemy);
             }
 
             if (punchCoroutine != null)
