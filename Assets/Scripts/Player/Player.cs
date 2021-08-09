@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public int silverCount = 0;
 
+    private bool isRespawning = false;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
 
     public void Hit(Vector3 hitDirection)
     {
-        if (stateMachine.GetCurrentState() == knockBackState)
+        if (stateMachine.GetCurrentState() == knockBackState || isRespawning)
         {
             return;
         }
@@ -163,6 +165,23 @@ public class Player : MonoBehaviour
     {
         levelEndMoveState.SetTarget(target);
         stateMachine.ChangeState(levelEndMoveState);
+    }
+
+    public void Revive()
+    {
+        this.health = 40.0f;
+        isRespawning = true;
+        stateMachine.ChangeState(startState);
+        spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+
+        StartCoroutine(RespawnDone());
+    }
+
+    public IEnumerator RespawnDone()
+    {
+        yield return new WaitForSeconds(5.0f);
+        spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        isRespawning = false;
     }
 }
 

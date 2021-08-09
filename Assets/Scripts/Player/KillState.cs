@@ -25,17 +25,19 @@ public class PlayerKillState: IState
        player.animator.SetBool("isHit", true);
 
        if (destroyCoroutine == null) {
-         destroyCoroutine = player.StartCoroutine(DestroyObject());
+         destroyCoroutine = player.StartCoroutine(Revive());
        }
     }
 
     public void Exit()
     {
+        player.animator.SetBool("isDead", false);
+        player.animator.SetBool("isHit", false);
     }
 
-    public IEnumerator DestroyObject()
+    public IEnumerator Revive()
     {
         yield return new WaitForSeconds(3.0f);
-        GameObject.Destroy(player.gameObject);
+        player.Revive();
     }
 }
