@@ -72,6 +72,15 @@ public class Player : MonoBehaviour
       
         UpdateOutOfBounds();
         UpdateRenderTag();
+
+        if (input.Pause())
+        {
+            if (Time.timeScale == 0.0f) {
+                Time.timeScale = 1.0f;
+            } else {
+                Time.timeScale = 0.0f;
+            }
+        }
     }
 
     private void UpdateRenderTag()
